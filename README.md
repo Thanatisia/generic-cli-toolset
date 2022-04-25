@@ -25,9 +25,7 @@ I also aim to be able to use this toolset to create a simple lemonbar scripting 
 + scriptable - this is my main focus as I do use programs such as rofi and dmenu that allows for advance scripting capabilities as well as automation
 
 ### Program Information
-- Version History:
-	- 2022-04-25 1434H : v0.1.0
-		- Initial creation
+Project Name : generic-cli-toolset
 
 ## Setup
 
