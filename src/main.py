@@ -84,24 +84,21 @@ def init():
             "add_help" : False
         }, [
         {
-            "short_opt" : "-h",
-            "long_opt" : "--help",
+            "flag" : ["-h", "--help"],
             "optionals" : {
-
+                "metavar" : ''
             }
         },
         {
-            "short_opt" : "-v",
-            "long_opt" : "--version",
+            "flag" : ["-v", "--version"],
             "optionals" : {
-
+                "metavar" : ''
             }
         },	
         {
-            "short_opt" : "-o",
-            "long_opt" : "--get-opts",
+            "flag" : ["-o", "--get-opts"],
             "optionals" : {
-
+                "metavar" : ''
             }
         },
     ])
@@ -124,15 +121,15 @@ def main():
     if args.help:
         # Display Help message
         print_help()
-
-    if args.version:
+    elif args.version:
         # Display Version
         print_version()
-
-    if args.get_opts:
+    elif args.get_opts:
         # Output
         opt_str = ' '.join(options)
         print(opt_str)
+    else:
+        print_help()
 
 if __name__ == "__main__":
     setup()

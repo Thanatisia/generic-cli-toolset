@@ -18,7 +18,7 @@ class Initialize():
 
 	1. Initialize argparse
 	"""
-	def __init__(self, parser=None, parser_opts=None, arguments=None):
+	def __init__(self, parser=None, parser_opts=None, arguments=None, arg_list=None, namespace=None):
 		"""
 		:: Params
 			parser : The parser you want to use (can be None)
@@ -40,16 +40,14 @@ class Initialize():
 					[
 						# Argument 1
 						{
-							"short_opt" : "",
-							"long_opt" : "",
+                            "flags" : ["flag-or-string"],
 							"optionals" : {
 								# ...
 							}
 						},
 						# Argument 2
 						{
-							"short_opt" : "",
-							"long_opt" : "",
+                            "flags" : ["flag-or-string"],
 							"optionals" : {
 								# ...
 							}
@@ -58,6 +56,16 @@ class Initialize():
 					]
 				Optional: True
 				Default: None
+
+            arg_list : A List of strings to parse for parse_args()
+                Type: List
+                Optional: True
+                Default: None
+
+            namespace : A Namespace object to hold the variables
+                Type: Namespace
+                Optional: True
+                Default: None
 		"""
 
 		# Initialize Command Line Interface (CLI) Argument Controller class
@@ -69,19 +77,21 @@ class Initialize():
 		for i in range(number_of_arguments):
 			curr_arg = arguments[i]
 			
-			# Retrieve Argument Details
-			curr_arg_short_opt = curr_arg["short_opt"]	# String
-			curr_arg_long_opt = curr_arg["long_opt"]	# String
-			if "optionals" in curr_arg:
-				curr_arg_optionals = curr_arg["optionals"] 	# Dictionary
-			else:
-				curr_arg_optionals = {}
-		
+            # Retrieve Argument Details
+            # List
+            curr_arg_name_or_flags = curr_arg["flags"]
+
+            if "optionals" in curr_arg:
+                # Dictionary
+                curr_arg_optionals = curr_arg["optionals"]
+            else:
+                curr_arg_optionals = {}
+
 			# Add current argument to Argument Parser
-			self.cliargs.arg_add(curr_arg_short_opt, curr_arg_long_opt, self.parser, **curr_arg_optionals)
+			self.cliargs.arg_add(curr_arg_name_or_flags, self.parser, **curr_arg_optionals)
 
 		# Parse Arguments
-		self.args = self.cliargs.arg_parse(self.parser)
+		self.args = self.cliargs.arg_parse(self.parser, arg_list, namespace)
 
 	def get_parser(self):
 		return self.parser
