@@ -55,82 +55,85 @@ options = {
 }
 
 def print_help():
-	"""
+    """
 	Print the Help menu
 	"""
-	print("Help:")
-	for label, opt_list in options.items():
-		print("\t{} : {}".format(label, opt_list)
+    print("Help:")
+    for label, opt_list in options.items():
+        print("\t{} : {}".format(label, opt_list))
 
 def print_version():
-	"""
-	Print the version info
-	"""
-	print("Version: {}, {} Made by {}".format("v0.1.0", "CLIArgs : Generic CLI Toolset (Name is horrible, sorry, still a WIP)", "Asura (Thanatisia)")
+    """
+    Print the version info
+    """
+    print("Version: {}, {} Made by {}".format("v0.1.0", "CLIArgs : Generic CLI Toolset (Name is horrible, sorry, still a WIP)", "Asura (Thanatisia)"))
 
 def init():
-	"""
-	Initialization
-	"""
-	global genericli_toolset, genericli, cliargs_obj, args
+    """
+    Initialization
+    """
+    global genericli_toolset, genericli, cliargs_obj, args
 
-	# Initialize classes
-	genericli_toolset = toolset.Toolset()
-	genericli = genericli_toolset.CLIArgsControl()
-	
-	# Initialize CLI Argument Controller
-	cliargs_obj = cliargs.Initialize(None, [
-		{
-			"short_opt" : "-h",
-			"long_opt" : "-h",
-			"optionals" : {
+    # Initialize classes
+    genericli_toolset = toolset.Toolset()
+    genericli = genericli_toolset.CLIArgsControl()
 
-			}
-		},
-		{
-			"short_opt" : "-v",
-			"long_opt" : "--version",
-			"optionals" : {
+    # Initialize CLI Argument Controller
+    cliargs_obj = cliargs.Initialize(None, 
+        {
+            "add_help" : False
+        }, [
+        {
+            "short_opt" : "-h",
+            "long_opt" : "--help",
+            "optionals" : {
 
-			}
-		},	
-		{
-			"short_opt" : "-o",
-			"long_opt" : "--get-opts",
-			"optionals" : {
+            }
+        },
+        {
+            "short_opt" : "-v",
+            "long_opt" : "--version",
+            "optionals" : {
 
-			}
-		},
-	])
+            }
+        },	
+        {
+            "short_opt" : "-o",
+            "long_opt" : "--get-opts",
+            "optionals" : {
 
-	# Get arguments
-	args = cliargs_obj.get_args
-	
-	# Output
-	
+            }
+        },
+    ])
+
+    # Get arguments
+    args = cliargs_obj.get_args()
+
+    # Output
+
 def setup():
-	"""
-	Basic Setup
-	"""
-	init()
+    """
+    Basic Setup
+    """
+    init()
 
 def main():
-	""" 
-	Process Arguments
-	"""
-	if args.help:
-		# Display Help message
-		print_help()
+    """ 
+    Process Arguments
+    """
+    if args.help:
+        # Display Help message
+        print_help()
 
-	if args.version:
-		# Display Version
-		print_version()
+    if args.version:
+        # Display Version
+        print_version()
 
-	if args.getopts:
-		# Output
-		opt_str = ' '.join(options)
-		print(opt_str)
+    if args.get_opts:
+        # Output
+        opt_str = ' '.join(options)
+        print(opt_str)
 
 if __name__ == "__main__":
-	setup()
-	main()
+    setup()
+    main()

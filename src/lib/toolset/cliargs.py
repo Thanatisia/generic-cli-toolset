@@ -10,7 +10,7 @@ import os
 import argparse
 
 ## Dependencies
-import toolset
+import lib.toolset.toolset as toolset
 
 class Initialize():
 	"""
@@ -18,13 +18,21 @@ class Initialize():
 
 	1. Initialize argparse
 	"""
-	def __init__(self, parser=None, arguments=None):
+	def __init__(self, parser=None, parser_opts=None, arguments=None):
 		"""
 		:: Params
 			parser : The parser you want to use (can be None)
 				Type: argparse.ArgumentParser() object
 				Optional: True
 				Default: None
+
+            parser_opts : Options to pass to the generating parser
+                Type: Dictionary (Kwargs)
+                Optional: True
+                Default: None
+                Values:
+                    Key : Parameter Name
+                    Value : Parameter value
 
 			arguments : All Arguments and their definitions here
 				Type: List
@@ -53,7 +61,7 @@ class Initialize():
 		"""
 
 		# Initialize Command Line Interface (CLI) Argument Controller class
-		self.cliargs = toolset.Toolset.CLIArgsControl(parser)
+		self.cliargs = toolset.Toolset.CLIArgsControl(parser, parser_opts)
 		self.parser = self.cliargs.parser
 
 		# Add Arguments
@@ -75,8 +83,8 @@ class Initialize():
 		# Parse Arguments
 		self.args = self.cliargs.arg_parse(self.parser)
 
-	def get_parser():
+	def get_parser(self):
 		return self.parser
 
-	def get_args():
+	def get_args(self):
 		return self.args
