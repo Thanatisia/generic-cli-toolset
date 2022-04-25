@@ -6,6 +6,9 @@ A simple but powerful Command Line Interface utility powered by argparse that wi
 
 ## Table of Contents
 - [Information](#information)
+- [Setup](#setup)
+- [Documentation](#documentation)
+- [Contacts](#contacts)
 
 ## Information
 
@@ -25,7 +28,8 @@ I also aim to be able to use this toolset to create a simple lemonbar scripting 
 + scriptable - this is my main focus as I do use programs such as rofi and dmenu that allows for advance scripting capabilities as well as automation
 
 ### Program Information
-Project Name : generic-cli-toolset
+
++ Project Name : generic-cli-toolset
 
 ## Setup
 
@@ -113,7 +117,7 @@ python main.py [{options} [arguments]]
 	]
 	```
 
-### Contacts
+## Contacts
 
 - Author(s) : 
 	- [Asura/Thanatisia](https://github.com/Thanatisia)
